@@ -43,7 +43,7 @@ class Cheep:
         for dx, dy in self.directions_possible():
             if 0 <= x + dx < self.grid_size and 0 <= y + dy < self.grid_size:  # on vérifie les limites de la grille
             
-            square_near = self.Grid[x +dx][y +dy]  # on crée une instance de Square pour la case voisine
+                square_near = self.Grid[x +dx][y +dy]  # on crée une instance de Square pour la case voisine
                 
             if square_near.has_grass(): # on vérifie s'il y a de l'herbe
                 cases_with_grass.append((x + dx, y + dy)) # on ajoute les coordonnées de la case avec herbe à la liste
