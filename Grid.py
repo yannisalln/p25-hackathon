@@ -14,6 +14,7 @@ class Grid :
         self.mouton_img = pg.image.load("mouton.png").convert_alpha()
         self.mouton_img = pg.transform.scale(self.mouton_img,(self.cube, self.cube))
         self.grid=np.array(self.GRID_SIZE,self.GRID_SIZE)
+        
         for x in range(self.GRID_SIZE):
             for y in range(self.GRID_SIZE):
                 self.grid[x,y]=square
