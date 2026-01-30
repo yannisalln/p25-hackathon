@@ -148,7 +148,7 @@ class Sheep:
 
         if self.energy >= self.reproduction_threshold:
             self.energy -= self.reproduction_energy_cost
-            if self.direction_possible()
-            dx, dy = random.choice(self.directions_possible())
-            Grid.sheep_list.append(Sheep(self.x + dx, self.y + dy, Grid, Square)) #changer la liste de la grid
+            if self.direction_possible() != []:
+                dx, dy = random.choice(self.directions_possible())
+                Grid.sheep_list.append(Sheep(self.x + dx, self.y + dy, Grid, Square)) #changer la liste de la grid
 
