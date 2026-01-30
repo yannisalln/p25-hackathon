@@ -2,7 +2,7 @@ import random
 from Square.py import Square 
 
 class Sheep:
-    def __init__(self, x, y, grid_size, Grid,
+    def __init__(self, x, y, grid_size,
                 sheep_initial_energy, 
                 sheep_energy_loss_per_turn, 
                 sheep_energy_from_grass, 
