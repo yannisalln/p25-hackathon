@@ -1,8 +1,8 @@
 import random
-from Square.py import Square    
+from Square.py import Square 
 
 class Sheep:
-    def __init__(self, x, y, grid_size,
+    def __init__(self, x, y, grid_size, Grid,
                 sheep_initial_energy, 
                 sheep_energy_loss_per_turn, 
                 sheep_energy_from_grass, 
@@ -13,6 +13,7 @@ class Sheep:
         self.x = x
         self.y = y
         self.grid_size = grid_size
+        self.Grid = Grid
         self.energy_initial = sheep_initial_energy
         self.energy = sheep_initial_energy
         self.age = 0
@@ -28,7 +29,7 @@ class Sheep:
         directions_possible = []
    
         for dx, dy in self.directions:
-            if 0 <= self.x + dx < self.grid_size and 0 <= self.y + dy < self.grid_size:  # on vérifie les limites de la grille
+            if 0 <= self.x + dx < self.grid_size and 0 <= self.y + dy < self.grid_size and not square_near.has_sheep() and not square_near.has_wolf():  # on vérifie les limites de la grille + pas loup ou mouton
                 directions_possible.append((dx, dy)) # on ajoute la direction possible à la liste
         return directions_possible
     
@@ -42,23 +43,22 @@ class Sheep:
         for dx, dy in self.directions_possible():
             if 0 <= x + dx < self.grid_size and 0 <= y + dy < self.grid_size:  # on vérifie les limites de la grille
             
-            square_near = Square(x +dx, y +dy)  # on crée une instance de Square pour la case voisine
+            square_near = self.Grid[x +dx][y +dy]  # on crée une instance de Square pour la case voisine
                 
-            if not square_near.has_sheep() and not square_near.has_wolf(): # on vérifie qu'il n'y a pas déjà un mouton ou un loup
-                if square_near.has_grass(): # on vérifie s'il y a de l'herbe
-                    cases_with_grass.append((x + dx, y + dy)) # on ajoute les coordonnées de la case avec herbe à la liste
+            if square_near.has_grass(): # on vérifie s'il y a de l'herbe
+                cases_with_grass.append((x + dx, y + dy)) # on ajoute les coordonnées de la case avec herbe à la liste
 
         if cases_with_grass:
             self.x, self.y = random.choice(cases_with_grass)  # on choisit une case avec de l'herbe au hasard
 
-        else:
+        if self.directions_possible():
             dx, dy = random.choice(self.directions_possible())  # on choisit une direction au hasard
             self.x += dx
             self.y += dy
     
 
     def eat(self):
-        square = Square(self.x, self.y)
+        square = self.Grid[self.x][self.y]
         if square.has_grass():
             square.remove_grass()
             self.energy += self.energy_from_grass
@@ -68,7 +68,7 @@ class Sheep:
         if self.energy >= self.reproduction_threshold:
             self.energy -= self.reproduction_energy_cost
             dx, dy = random.choice(self.directions_possible())
-            return Sheep(self.x + dx, self.y + dy, self.grid_size,  # on crée un nouveau mouton 
+            return Sheep(self.x + dx, self.y + dy, self.grid_size, self.Grid,  # on crée un nouveau mouton 
                          self.energy_initial,         # on pourra modifier les caractéristiques plus tard
                          self.energy_loss_per_turn,
                          self.energy_from_grass,
