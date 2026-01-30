@@ -1,9 +1,9 @@
-
 #Configuration initiale 
 GRID_SIZE=30
 INITIAL_SHEEP=50
 INITIAL_WOLVES=10
 INITIAL_GRASS_COVERAGE=0.3 #30% de la grille
+CUBE=40
 
 #Energie 
 SHEEP_INITIAL_ENERGY=20
@@ -28,14 +28,3 @@ GRASS_REGROWTH_TIME=7
 
 #Simulation
 MAX_TURN=500
-
-
-class mouton :
-    """
-    Stocker ses cordonnées, son niveau d'énergie, son age
-
-    se deplace aléatoirement
-
-    se reproduit seul
-
-    """
