@@ -13,6 +13,7 @@ class Sheep:
         self.x = x
         self.y = y
         self.grid_size = grid_size
+        self.energy_initial = sheep_initial_energy
         self.energy = sheep_initial_energy
         self.age = 0
         self.energy_loss_per_turn = sheep_energy_loss_per_turn
@@ -68,7 +69,7 @@ class Sheep:
             self.energy -= self.reproduction_energy_cost
             dx, dy = random.choice(self.directions_possible())
             return Sheep(self.x + dx, self.y + dy, self.grid_size,  # on crée un nouveau mouton 
-                         self.energy,              # on pourra modifier les caractéristiques plus tard
+                         self.energy_initial,         # on pourra modifier les caractéristiques plus tard
                          self.energy_loss_per_turn,
                          self.energy_from_grass,
                          self.reproduction_threshold,
