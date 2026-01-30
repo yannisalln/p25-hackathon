@@ -3,6 +3,7 @@ from Square import Square
 from Grid import Grid
 from Ecosysteme import *
 
+
 class Wolf:
     def __init__(self, x, y):
         self.x = x
