@@ -3,13 +3,7 @@ from Square.py import Square
 
 
 class Wolf:
-    def __init__(self, x, y, Grid, grid_size
-                 WOLF_INITIAL_ENERGY, 
-                 WOLF_ENERGY_LOSS_PER_TURN, 
-                 WOLF_ENERGY_FROM_SHEEP, 
-                 WOLF_REPRODUCTION_THRESHOLD,
-                 REPRODUCTION_ENERGY_COST,
-                 WOLF_MAX_AGE,):
+    def __init__(self, x, y, Grid):
         self.x = x
         self.y = y
         self.grid_size = grid_size
