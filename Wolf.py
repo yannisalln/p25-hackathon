@@ -4,10 +4,11 @@ from Grid import Grid
 from Ecosysteme import *
 
 class Wolf:
-    def __init__(self, x, y, Grid, Square):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
         
+        #pompe ecosysteme
         self.grid_size = GRID_SIZE
         self.energy = WOLF_INITIAL_ENERGY
         self.age = 0
@@ -23,7 +24,7 @@ class Wolf:
         directions_possible = []
    
         for dx, dy in self.directions:
-            if 0 <= self.x + dx < self.grid_size and 0 <= self.y + dy < self.grid_size and not (Square(self.x,self.y).sheep or Square(self.x,self.y).wolf()):  # on vérifie les limites de la grille # on vérifie qu'il n'y a pas déjà un mouton ou un loup
+            if 0 <= self.x + dx < self.grid_size and 0 <= self.y + dy < self.grid_size and not Square(self.x,self.y).wolf():  # on vérifie les limites de la grille # on vérifie qu'il n'y a pas déjà un mouton ou un loup
                 directions_possible.append((dx, dy)) # on ajoute la direction possible à la liste
         if directions_possible == [] :
             return False
@@ -31,8 +32,6 @@ class Wolf:
     
 
     def move_eat(self):
-        x = self.x
-        y = self.y
   
         cases_with_sheep = []
 
@@ -42,16 +41,16 @@ class Wolf:
             if square_near.sheep(): # on vérifie s'il y a un mouton
                 cases_with_sheep.append((x + dx, y + dy)) # on ajoute les coordonnées de la case avec mouton à la liste
 
-        if cases_with_sheep:
-            self.x, self.y = random.choice(square.has_sheep(x,y))  # on choisit une case nourriture au hasard
-
-        else:
+        if cases_with_sheep == []:
             dx, dy = random.choice(self.directions_possible())  # on choisit une direction au hasard
             self.x += dx
             self.y += dy
-    
-        square = Square(self.x, self.y)
-        if square.sheep():
+
+        else:
+            dx, dy = random.choice(cases_with_sheep)  # on choisit une direction au hasard
+            self.x += dx
+            self.y += dy
+            
             i = 0
             for ship in Grid.sheep_list :
                 i+=1
@@ -59,6 +58,8 @@ class Wolf:
                     Grid.sheep_list.pop(i)
                 continue
             self.energy += self.energy_from_sheep
+
+        return Grid.sheep_list
     
 
     def reproduce(self):
