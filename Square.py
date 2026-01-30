@@ -15,18 +15,16 @@ class Square:
         "Initialisation de la case"
         self.x = x
         self. y = y
-        self.grass = rd.choices([False, True], weights=[1 - GRASS_GROWTH_PROBABILITY, GRASS_GROWTH_PROBABILITY])[0]
+        self.grass = rd.random() < GRASS_GROWTH_PROBABILITY
         
     def growth (self) :
         "L'herbe repousse après un certain temps et de manière aléatoire"
-        "La fonction est appelée seulement pour les cases en terre"
-        assert not self.grass 
         if self.time_before_regrowth == 0:
             self.grass = True
             self.time_before_regrowth = -1
-        else :
-            self.grass = rd.choices([False, True], weights=[1 - self.growth, self.growth])[0]
-            if self.grass : self.time_before_regrowth = -1
+        elif rd.random() < GRASS_GROWTH_PROBABILITY: #S'il y a déjà de l'herbe ça ne change rien
+            self.grass = True
+            self.time_before_regrowth = -1
        
     def sheep_arrival(self):
         "Lorsqu'un mouton arrive sur la case cette fonction est appelée, si elle renvoie True il gagne de l'énergie"
