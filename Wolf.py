@@ -50,7 +50,7 @@ class Wolf:
             dx, dy = random.choice(cases_with_sheep)  # on choisit une direction au hasard
             self.x += dx
             self.y += dy
-            
+
             i = 0
             for ship in Grid.sheep_list :
                 i+=1
@@ -67,5 +67,5 @@ class Wolf:
         if self.energy >= self.reproduction_threshold:
             self.energy -= self.reproduction_energy_cost
             dx, dy = random.choice(self.directions_possible())
-            Grid.wolf_list.append(Wolf(self.x + dx, self.y + dy, Grid, Square)) #changer la liste de la grid
+            Grid.wolf_list.append(Wolf(self.x + dx, self.y + dy)) #changer la liste de la grid
 
