@@ -1,10 +1,10 @@
 from random import randint
 import pygame as pg
 from Ecosysteme import *
-import Sheep
-import Wolf 
-from Grass import Square
-import numpy as np 
+from Wolf import Wolf
+from Sheep import Sheep
+from Square import Square
+import numpy as np
 
 
 class Grid :
@@ -27,6 +27,7 @@ class Grid :
         for x in range(self.GRID_SIZE):
             for y in range(self.GRID_SIZE):
                 self.grid[x,y]=Square(x,y)
+        
             
     def run(self):
         pg.init()
@@ -49,16 +50,18 @@ class Grid :
             #écran marron
             marron=(137, 81, 41)
             self.screen.fill(marron)
-            #on dessine l'herbe
+            #on ajout l'age 
+            self.incrementer_age()
             #array de booleen( true = herbe)
             self.affiche_herbe()
-            # #on dessine les moutons
-            # self.affiche_moutons(moutons)
-            # #on dessine les loups 
-            # self.affiche_loups(loups)
+            self.maj_animaux()
+            self.maj_mort()
+            self.reproduction()
+            self.affiche_animaux()
+            
             #on met à jour
             pg.display.update()
-            clock.tick(60)
+            clock.tick(5)
 
         pg.quit()
     
