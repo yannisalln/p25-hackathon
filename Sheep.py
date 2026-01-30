@@ -1,5 +1,5 @@
-import random
-from Square.py import Square 
+'''import random
+from Square import Square 
 
 class Cheep:
     def __init__(self, x, y, grid_size, Grid,
@@ -43,7 +43,7 @@ class Cheep:
         for dx, dy in self.directions_possible():
             if 0 <= x + dx < self.grid_size and 0 <= y + dy < self.grid_size:  # on vérifie les limites de la grille
             
-                square_near = self.Grid[x +dx][y +dy]  # on crée une instance de Square pour la case voisine
+            square_near = self.Grid[x +dx][y +dy]  # on crée une instance de Square pour la case voisine
                 
             if square_near.has_grass(): # on vérifie s'il y a de l'herbe
                 cases_with_grass.append((x + dx, y + dy)) # on ajoute les coordonnées de la case avec herbe à la liste
@@ -77,7 +77,7 @@ class Cheep:
                          self.max_age)
         return None
     
-
+'''
 
 
 
@@ -129,7 +129,7 @@ class Sheep:
             square_near = Square(self.x+dx, self.y+dy)  # on crée une instance de Square pour la case voisine
             
             if square_near.grass(): # on vérifie s'il y a un mouton
-                cases_with_grass.append((x + dx, y + dy)) # on ajoute les coordonnées de la case avec mouton à la liste
+                cases_with_grass.append((self.x + dx, self.y + dy)) # on ajoute les coordonnées de la case avec mouton à la liste
 
         if cases_with_grass == []:
             dx, dy = random.choice(self.directions_possible())  # on choisit une direction au hasard

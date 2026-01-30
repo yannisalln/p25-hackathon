@@ -36,10 +36,10 @@ class Wolf:
         cases_with_sheep = []
 
         for dx, dy in self.directions_possible():
-            square_near = Square(x+dx, y+dy)  # on crée une instance de Square pour la case voisine
+            square_near = Square(self.x+dx, self.y+dy)  # on crée une instance de Square pour la case voisine
             
             if square_near.sheep(): # on vérifie s'il y a un mouton
-                cases_with_sheep.append((x + dx, y + dy)) # on ajoute les coordonnées de la case avec mouton à la liste
+                cases_with_sheep.append((self.x + dx, self.y + dy)) # on ajoute les coordonnées de la case avec mouton à la liste
 
         if cases_with_sheep == []:
             dx, dy = random.choice(self.directions_possible())  # on choisit une direction au hasard
