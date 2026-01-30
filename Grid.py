@@ -7,6 +7,9 @@ class Grid :
     def __init__(self,GRID_SIZE,CUBE):
         self.GRID_SIZE=GRID_SIZE
         self.cube= CUBE
+        self.mouton_img = pg.image.load("mouton.png").convert_alpha()
+        self.mouton_img = pg.transform.scale(self.mouton_img,(self.cube, self.cube))
+
 
     def trace_initial(self):
         """
@@ -25,8 +28,17 @@ class Grid :
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     running = False
+        
+    
+
+
+
 
         pg.quit()
+
+    def affichage_moutons(self,position_mouton):
+
+
 
 
 if __name__ == "__main__":
