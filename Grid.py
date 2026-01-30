@@ -1,6 +1,6 @@
 from random import randint
 import pygame as pg
-
+from Ecosysteme import *
 
 
 class Grid :
@@ -18,9 +18,20 @@ class Grid :
         screen = pg.display.set_mode((self.cube*self.GRID_SIZE, self.cube*self.GRID_SIZE))
         rect = pg.Rect(0,0 ,self.cube*self.GRID_SIZE, self.cube*self.GRID_SIZE)
         pg.draw.rect(screen, marron , rect)
-        
+        pg.display.update()
+
+        running = True
+        while running:
+            for event in pg.event.get():
+                if event.type == pg.QUIT:
+                    running = False
+
+        pg.quit()
+
 
 if __name__ == "__main__":
     print("lancer")
-    jeu=Grid
-    
+    GRID_SIZE = 20
+    CUBE = 30
+    jeu=Grid(GRID_SIZE,CUBE)
+    jeu.trace_initial()
