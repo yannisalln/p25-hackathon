@@ -1,14 +1,15 @@
 from random import randint
 import pygame as pg
 from Ecosysteme import *
-import Sheep
-import Wolf 
-import Square
-import numpy as np 
+from Wolf import Wolf
+from Sheep import Sheep
+from Square import Square
+import numpy as np
 
 
 class Grid :
     def __init__(self,GRID_SIZE,CUBE):
+        self.running = True
         self.GRID_SIZE=GRID_SIZE
         self.cube= CUBE
         self.wolf_list=[]
@@ -25,10 +26,9 @@ class Grid :
         self.vert=(20, 148, 20)
         for x in range(self.GRID_SIZE):
             for y in range(self.GRID_SIZE):
-                self.grid[x,y]=square
+                self.grid[x,y]=Square(x,y)
+        
             
-
-
     def run(self):
         pg.init()
         self.screen = pg.display.set_mode((self.cube*self.GRID_SIZE, self.cube*self.GRID_SIZE))
@@ -45,21 +45,23 @@ class Grid :
                     self.running = False
 
             
-            moutons = self.ecosysteme.positionsmoutons()
+            # moutons = self.ecosysteme.positionsmoutons()
             #à chaque boucle, on retrace tout
             #écran marron
             marron=(137, 81, 41)
             self.screen.fill(marron)
-            #on dessine l'herbe
+            #on ajout l'age 
+            self.incrementer_age()
             #array de booleen( true = herbe)
-            self.affiche_herbe(herbe)
-            #on dessine les moutons
-            self.affiche_moutons(moutons)
-            #on dessine les loups 
-            self.affiche_loups(loups)
+            self.affiche_herbe()
+            self.maj_animaux()
+            self.maj_mort()
+            self.reproduction()
+            self.affiche_animaux()
+            
             #on met à jour
             pg.display.update()
-            clock.tick(60)
+            clock.tick(5)
 
         pg.quit()
     
@@ -134,6 +136,6 @@ if __name__ == "__main__":
     GRID_SIZE = 20
     CUBE = 30
     jeu=Grid(GRID_SIZE,CUBE)
-    jeu.trace_initial()
+    jeu.run()
 
 
