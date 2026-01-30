@@ -1,4 +1,3 @@
-
 #Configuration initiale 
 GRID_SIZE=30
 INITIAL_SHEEP=50
